@@ -10,8 +10,12 @@ std::ostream& operator<<(std::ostream& out, const Table& object) {
 	return out;
 }
 
-std::istream& operator<<(std::istream& in, Table& object) {
-	// TODO
+std::istream& operator>>(std::istream& in, Table& object) {
+	for (int i = 0; i < object.m_rows; ++i) {
+		for (int j = 0; j < object.m_columns; ++j) {
+			in >> object.m_data[i][j];
+		}
+	}
 	return in;
 }
 
@@ -88,9 +92,15 @@ Table& Table::operator*=(const Table& object) {
 	int c = object.m_columns;
 	int** tmp = new int* [r];
 	for (int i = 0; i < r; ++i) {
-		tmp[i] = new int[c];
+		tmp[i] = new int[c] {};
 	}
-	// TODO
+	for (int i = 0; i < r; ++i) {
+		for (int j = 0; j < c; ++j) {
+			for (int k = 0; k < m_columns; ++k) {
+				tmp[i][j] += m_data[i][k] * object.m_data[k][j];
+			}
+		}
+	}
 	deallocate();
 	m_rows = r;
 	m_columns = c;
@@ -100,7 +110,7 @@ Table& Table::operator*=(const Table& object) {
 
 void Table::allocate_and_initialize(const int* const* data) {
 	m_data = new int* [m_rows];
-	for (int i = 0; i < m_columns; ++i) {
+	for (int i = 0; i < m_rows; ++i) {
 		m_data[i] = new int[m_columns] {};
 	}
 	if (data != nullptr) {

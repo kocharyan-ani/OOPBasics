@@ -12,26 +12,33 @@ std::ostream& operator<<(std::ostream& out, const Set& object) {
 	return out;
 }
 
-std::istream& operator>>(std::istream& in, Set& object) {
-	// TODO
-	return in;
+Set::Set()
+	: m_size(0)
+	, m_data(nullptr) {
+	m_data = new bool[s_set_limit] {};
 }
 
-Set::Set() {}
-
-Set::Set(int size, const int* data) {
-	for (int i = 0; i < size; ++i) {
+Set::Set(int size, const int* data)
+	: m_size(size)
+	, m_data(nullptr) {
+	m_data = new bool[s_set_limit] {};
+	for (int i = 0; i < m_size; ++i) {
 		m_data[data[i]] = true;
 	}
 }
 
 Set::Set(const Set& object) {
-	initialize(object.m_data);
+	allocate_and_initialize(object.m_data);
+}
+
+Set::~Set() {
+	deallocate();
 }
 
 Set& Set::operator=(const Set& object) {
 	if (this != &object) {
-		initialize(object.m_data);
+		deallocate();
+		allocate_and_initialize(object.m_data);
 	}
 	return *this;
 }
@@ -82,10 +89,15 @@ bool Set::operator==(const Set& object) const {
 	return true;
 }
 
-void Set::initialize(const bool* data) {
+void Set::allocate_and_initialize(const bool* data) {
+	m_data = new bool[s_set_limit] {};
 	for (int i = 0; i < s_set_limit; ++i) {
 		m_data[i] = data[i];
 	}
+}
+
+void Set::deallocate() {
+	delete[] m_data;
 }
 
 void Set::check_size(int element) const {

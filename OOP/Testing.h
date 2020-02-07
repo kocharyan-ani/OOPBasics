@@ -8,5 +8,5 @@ namespace Testing {
 	void test_for_set();
 	void test_for_string();
 	void test_for_table();
-	void test_for_vector();
+	void test_for_myvector();
 }

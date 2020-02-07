@@ -1,45 +1,50 @@
 #include "HugeInteger.h"
 
+// TODO implement
 std::ostream& operator<<(std::ostream& out, const HugeInteger& object) {
-	// TODO
 	return out;
 }
 
+// TODO implement
 std::istream& operator>>(std::istream& in, HugeInteger& object) {
-	// TODO
 	return in;
 }
 
 int HugeInteger::s_created_object_count = 0;
 
+// TODO implement
 HugeInteger::HugeInteger(int value) {
 	++s_created_object_count;
 }
 
+// TODO implement
 HugeInteger::HugeInteger(int length, const char* data) {
 	++s_created_object_count;
 }
 
+// TODO implement
 HugeInteger::HugeInteger(const HugeInteger& object) {
 	++s_created_object_count;
 }
 
+// TODO implement
 HugeInteger& HugeInteger::operator=(const HugeInteger& object) {
-	// TODO
+	if (this != &object) {
+	}
 	return *this;
 }
 
+// TODO implement
 HugeInteger::~HugeInteger() {
-
 }
 
+// TODO implement
 HugeInteger& HugeInteger::operator+=(const HugeInteger& object) {
-	// TODO
 	return *this;
 }
 
+// TODO implement
 HugeInteger& HugeInteger::operator++() {
-	// TODO
 	return *this;
 }
 
@@ -49,18 +54,18 @@ HugeInteger HugeInteger::operator++(int) {
 	return tmp;
 }
 
+// TODO implement
 bool HugeInteger::operator==(const HugeInteger& object) const {
-	// TODO
 	return true;
 }
 
+// TODO implement
 bool HugeInteger::operator<(const HugeInteger& object) const {
-	// TODO
 	return true;
 }
 
+// TODO implement
 HugeInteger::operator int() {
-	// TODO
 	return -1;
 }
 

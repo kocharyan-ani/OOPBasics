@@ -4,7 +4,7 @@
 
 class BitVector {
 	friend std::ostream& operator<<(std::ostream&, const BitVector&);
-	friend std::istream& operator<<(std::istream&, BitVector&);
+	friend std::istream& operator>>(std::istream&, BitVector&);
 
 public:
 	explicit BitVector(int);

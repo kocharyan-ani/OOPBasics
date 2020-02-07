@@ -12,12 +12,8 @@ std::ostream& operator<<(std::ostream& out, const Array& object) {
 }
 
 std::istream& operator>>(std::istream& in, Array& object) {
-	if (!object.is_empty()) {
-		object.m_size = 0;
-	}
-	int x{};
-	while (in >> x) {
-		object.push_back(x);
+	for(int i = 0; i < object.m_size; ++i) {
+		in >> object[i];
 	}
 	return in;
 }
@@ -106,7 +102,7 @@ void Array::insert(int index, int element) {
 			tmp[i] = m_data[i];
 		}
 		tmp[index] = element;
-		for (int i = index + 1; i < m_size; ++i) {
+		for (int i = index + 1; i <= m_size; ++i) {
 			tmp[i] = m_data[i - 1];
 		}
 		delete[] m_data;

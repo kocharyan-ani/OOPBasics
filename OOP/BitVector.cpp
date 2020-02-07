@@ -8,8 +8,10 @@ std::ostream& operator<<(std::ostream& out, const BitVector& object) {
 	return out;
 }
 
-std::istream& operator<<(std::istream& in, BitVector& object) {
-	// TODO
+std::istream& operator>>(std::istream& in, BitVector& object) {
+	for (int i = 0; i < object.m_size; ++i) {
+		in >> object.m_data[i];
+	}
 	return in;
 }
 
@@ -69,12 +71,31 @@ BitVector& BitVector::operator^=(const BitVector& object) {
 }
 
 BitVector& BitVector::operator<<=(int n) {
-	// TODO
+	if (n > m_size) {
+		n = m_size;
+	}
+	int i = 0;
+	for (; i < m_size - n; ++i) {
+		m_data[i] = m_data[i + n];
+	}
+	for (; i < m_size; ++i) {
+		m_data[i] = false;
+	}
 	return *this;
 }
 
 BitVector& BitVector::operator>>=(int n) {
-	// TODO
+	if (n > m_size) {
+		n = m_size;
+	}
+	int i = m_size - 1;
+	for (; i >= n; --i) {
+		auto x = m_data[i - n];
+		m_data[i] = m_data[i - n];
+	}
+	for (; i >= 0; --i) {
+		m_data[i] = false;
+	}
 	return *this;
 }
 

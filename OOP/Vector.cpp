@@ -1,38 +1,40 @@
 #include "Vector.h"
 
-std::ostream& operator<<(std::ostream& out, const Vector& object) {
+std::ostream& operator<<(std::ostream& out, const MyVector& object) {
 	out << '(';
 	for (int i = 0; i < object.m_dimension - 1; ++i) {
 		out << object.m_data[i] << ', ';
 	}
-	out << object.m_data[object.m_dimension - 1] << ')';
+	out << object.m_data[object.m_dimension - 1] << ')' << std::endl;
 	return out;
 }
 
-std::istream& operator>>(std::istream& in, Vector& object) {
-	// TODO
+std::istream& operator>>(std::istream& in, MyVector& object) {
+	for (int i = 0; i < object.m_dimension; ++i) {
+		in >> object.m_data[i];
+	}
 	return in;
 }
 
-Vector::Vector(int dimension)
+MyVector::MyVector(int dimension)
 	: m_dimension(dimension)
 	, m_data(nullptr) {
 	allocate_and_initialize();
 }
 
-Vector::Vector(int dimension, const int* data)
+MyVector::MyVector(int dimension, const int* data)
 	: m_dimension(dimension)
 	, m_data(nullptr) {
 	allocate_and_initialize(data);
 }
 
-Vector::Vector(const Vector& object)
+MyVector::MyVector(const MyVector& object)
 	: m_dimension(object.m_dimension)
 	, m_data(nullptr) {
 	allocate_and_initialize(object.m_data);
 }
 
-Vector& Vector::operator=(const Vector& object) {
+MyVector& MyVector::operator=(const MyVector& object) {
 	if (this != &object) {
 		deallocate();
 		m_dimension = object.m_dimension;
@@ -41,27 +43,31 @@ Vector& Vector::operator=(const Vector& object) {
 	return *this;
 }
 
-Vector::~Vector() {
+MyVector::~MyVector() {
 	deallocate();
 }
 
-int Vector::distance(const Vector& object) const {
+double MyVector::distance(const MyVector& object) const {
 	check_size(object);
-	// TODO
-	return -1;
+	double x{}, y{};
+	for (int i = 0; i < m_dimension; ++i) {
+		y = (object.m_data[i] - m_data[i]);
+		x += y * y;
+	}
+	return pow(x, 1.0 / 2);
 }
 
-int& Vector::operator[](int dimension) {
+int& MyVector::operator[](int dimension) {
 	check_dimension(dimension);
 	return m_data[dimension];
 }
 
-const int& Vector::operator[](int dimension) const {
+const int& MyVector::operator[](int dimension) const {
 	check_dimension(dimension);
 	return m_data[dimension];
 }
 
-Vector& Vector::operator+=(const Vector& object) {
+MyVector& MyVector::operator+=(const MyVector& object) {
 	check_size(object);
 	for (int i = 0; i < m_dimension; ++i) {
 		m_data[i] += object.m_data[i];
@@ -69,7 +75,7 @@ Vector& Vector::operator+=(const Vector& object) {
 	return *this;
 }
 
-Vector& Vector::operator-=(const Vector& object) {
+MyVector& MyVector::operator-=(const MyVector& object) {
 	check_size(object);
 	for (int i = 0; i < m_dimension; ++i) {
 		m_data[i] += object.m_data[i];
@@ -77,12 +83,16 @@ Vector& Vector::operator-=(const Vector& object) {
 	return *this;
 }
 
-int Vector::operator*(const Vector& object) {
-	// TODO;
-	return -1;
+int MyVector::operator*(const MyVector& object) {
+	check_size(object);
+	int x{};
+	for (int i = 0; i < m_dimension; ++i) {
+		x += m_data[i] * object.m_data[i];
+	}
+	return x;
 }
 
-bool Vector::operator==(const Vector& object) const {
+bool MyVector::operator==(const MyVector& object) const {
 	if (m_dimension != object.m_dimension) {
 		return false;
 	}
@@ -94,7 +104,7 @@ bool Vector::operator==(const Vector& object) const {
 	return true;
 }
 
-void Vector::allocate_and_initialize(const int* data) {
+void MyVector::allocate_and_initialize(const int* data) {
 	m_data = new int[m_dimension] {};
 	if (data != nullptr) {
 		for (int i = 0; i < m_dimension; ++i) {
@@ -103,30 +113,30 @@ void Vector::allocate_and_initialize(const int* data) {
 	}
 }
 
-void Vector::deallocate() {
+void MyVector::deallocate() {
 	delete[] m_data;
 }
 
-void Vector::check_dimension(int dimension) const {
+void MyVector::check_dimension(int dimension) const {
 	if (dimension < 0 || dimension >= m_dimension) {
 		throw std::exception("Index is out of bounds.");
 	}
 }
 
-void Vector::check_size(const Vector& object) const {
+void MyVector::check_size(const MyVector& object) const {
 	if (m_dimension != object.m_dimension) {
-		throw std::exception("Not correspondig dimensions of vectors.");
+		throw std::exception("Not correspondig dimensions of MyVectors.");
 	}
 }
 
-Vector operator+(Vector v1, const Vector& v2) {
+MyVector operator+(MyVector v1, const MyVector& v2) {
 	return v1 += v2;
 }
 
-Vector operator-(Vector v1, const Vector& v2) {
+MyVector operator-(MyVector v1, const MyVector& v2) {
 	return v1 -= v2;
 }
 
-bool operator!=(const Vector& v1, const Vector& v2) {
+bool operator!=(const MyVector& v1, const MyVector& v2) {
 	return !(v1 == v2);
 }

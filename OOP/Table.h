@@ -4,7 +4,7 @@
 
 class Table {
 	friend std::ostream& operator<<(std::ostream&, const Table&);
-	friend std::istream& operator<<(std::istream&, Table&);
+	friend std::istream& operator>>(std::istream&, Table&);
 
 public:
 	Table(int, int);

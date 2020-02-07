@@ -4,14 +4,13 @@
 
 class Set {
 	friend std::ostream& operator<<(std::ostream&, const Set&);
-	friend std::istream& operator>>(std::istream&, Set&);
 
 public:
 	Set();
 	Set(int, const int*);
 	Set(const Set&);
 	Set& operator=(const Set&);
-	~Set() {}
+	~Set();
 
 	bool contains(int) const;
 	bool is_sub_set(const Set&) const;
@@ -23,7 +22,8 @@ public:
 	bool operator==(const Set&) const;
 
 private:
-	void initialize(const bool*);
+	void allocate_and_initialize(const bool*);
+	void deallocate();
 
 	void check_size(int) const;
 
@@ -31,7 +31,7 @@ private:
 	static const int s_set_limit = 10001;
 
 	int m_size;
-	bool m_data[s_set_limit];
+	bool* m_data;
 };
 
 Set operator&(Set, const Set&);

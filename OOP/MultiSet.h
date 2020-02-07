@@ -4,14 +4,13 @@
 
 class MultiSet {
 	friend std::ostream& operator<<(std::ostream&, const MultiSet&);
-	friend std::istream& operator>>(std::istream&, MultiSet&);
 
 public:
 	MultiSet();
 	MultiSet(int, const int*);
 	MultiSet(const MultiSet&);
 	MultiSet& operator=(const MultiSet&);
-	~MultiSet() {}
+	~MultiSet();
 
 	bool contains(int) const;
 	bool is_sub_set(const MultiSet&) const;
@@ -23,7 +22,8 @@ public:
 	bool operator==(const MultiSet&) const;
 
 private:
-	void initialize(const int*);
+	void allocate_and_initialize(const int*);
+	void deallocate();
 
 	void check_size(int) const;
 
@@ -31,7 +31,7 @@ private:
 	static const int s_set_limit = 10001;
 
 	int m_size;
-	int m_data[s_set_limit]{};
+	int* m_data;
 };
 
 MultiSet operator&(MultiSet, const MultiSet&);

@@ -14,26 +14,33 @@ std::ostream& operator<<(std::ostream& out, const MultiSet& object) {
 	return out;
 }
 
-std::istream& operator>>(std::istream& in, MultiSet& object) {
-	// TODO
-	return in;
+MultiSet::MultiSet()
+	: m_size(0)
+	, m_data(nullptr) {
+	m_data = new int[s_set_limit] {};
 }
 
-MultiSet::MultiSet() {}
-
-MultiSet::MultiSet(int size, const int* data) {
-	for (int i = 0; i < size; ++i) {
+MultiSet::MultiSet(int size, const int* data)
+	: m_size(size)
+	, m_data(nullptr) {
+	m_data = new int[s_set_limit] {};
+	for (int i = 0; i < m_size; ++i) {
 		++m_data[data[i]];
 	}
 }
 
 MultiSet::MultiSet(const MultiSet& object) {
-	initialize(object.m_data);
+	allocate_and_initialize(object.m_data);
+}
+
+MultiSet::~MultiSet() {
+	deallocate();
 }
 
 MultiSet& MultiSet::operator=(const MultiSet& object) {
 	if (this != &object) {
-		initialize(object.m_data);
+		deallocate();
+		allocate_and_initialize(object.m_data);
 	}
 	return *this;
 }
@@ -87,10 +94,15 @@ bool MultiSet::operator==(const MultiSet& object) const {
 	return true;
 }
 
-void MultiSet::initialize(const int* data) {
+void MultiSet::allocate_and_initialize(const int* data) {
+	m_data = new int[s_set_limit] {};
 	for (int i = 0; i < s_set_limit; ++i) {
 		m_data[i] = data[i];
 	}
+}
+
+void MultiSet::deallocate() {
+	delete[] m_data;
 }
 
 void MultiSet::check_size(int element) const {

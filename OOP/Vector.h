@@ -2,42 +2,42 @@
 
 #include <iostream>
 
-class Vector {
-	friend std::ostream& operator<<(std::ostream&, const Vector&);
-	friend std::istream& operator>>(std::istream&, Vector&);
+class MyVector {
+	friend std::ostream& operator<<(std::ostream&, const MyVector&);
+	friend std::istream& operator>>(std::istream&, MyVector&);
 
 public:
-	explicit Vector(int);	// n >= 2
-	Vector(int, const int*);
-	Vector(const Vector&);
-	Vector& operator=(const Vector&);
-	~Vector();
+	explicit MyVector(int);	// n >= 2
+	MyVector(int, const int*);
+	MyVector(const MyVector&);
+	MyVector& operator=(const MyVector&);
+	~MyVector();
 
 	int dimension() const { return m_dimension; }
-	int distance(const Vector&) const;
+	double distance(const MyVector&) const;
 
 	int& operator[](int);
 	const int& operator[](int) const;
 
-	Vector& operator+=(const Vector&);
-	Vector& operator-=(const Vector&);
-	int operator*(const Vector&);
+	MyVector& operator+=(const MyVector&);
+	MyVector& operator-=(const MyVector&);
+	int operator*(const MyVector&);
 
-	bool operator==(const Vector&) const;
+	bool operator==(const MyVector&) const;
 
 private:
 	void allocate_and_initialize(const int* = nullptr);
 	void deallocate();
 
 	void check_dimension(int) const;
-	void check_size(const Vector&) const;
+	void check_size(const MyVector&) const;
 
 private:
 	int m_dimension;
 	int* m_data;
 };
 
-Vector operator+(Vector, const Vector&);
-Vector operator-(Vector, const Vector&);
+MyVector operator+(MyVector, const MyVector&);
+MyVector operator-(MyVector, const MyVector&);
 
-bool operator!=(const Vector&, const Vector&);
+bool operator!=(const MyVector&, const MyVector&);
