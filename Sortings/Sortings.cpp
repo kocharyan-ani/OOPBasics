@@ -13,12 +13,13 @@ void Sortings::bubble_sort(int* array, int size) {
 }
 
 void Sortings::insertion_sort(int* array, int size) {
-	for (int i = 0; i < size; ++i) {
-		for (int j = 0; j < i; ++j) {
-			if (array[i] < array[j]) {
-				std::swap(array[i], array[j]);
-			}
+	for (int i = 1; i < size; ++i) {
+		int tmp = array[i], j = i - 1;
+		while (j >= 0 && array[j] > tmp) {
+			array[j + 1] = array[j];
+			--j;
 		}
+		array[j + 1] = tmp;
 	}
 }
 
