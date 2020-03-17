@@ -2,22 +2,23 @@
 
 #include <iostream>
 
+/*Class objects are multisets with value limitation [0, 10000]*/
 class MultiSet {
 	friend std::ostream& operator<<(std::ostream&, const MultiSet&);
 
 public:
-	MultiSet();
-	MultiSet(int, const int*);
-	MultiSet(const MultiSet&);
-	MultiSet& operator=(const MultiSet&);
-	~MultiSet();
+	MultiSet();	// default ctor
+	MultiSet(int, const int*);	// ctor with parameters
+	MultiSet(const MultiSet&);	// copy ctor
+	MultiSet& operator=(const MultiSet&);	// assignment operator
+	~MultiSet();	// dtor
 
-	bool contains(int) const;
-	bool is_sub_set(const MultiSet&) const;
+	bool contains(int) const;	// checks if *this contains given value
+	bool is_sub_set(const MultiSet&) const;	// checks if given Multiset object is subset for *this
 
-	MultiSet& operator&=(const MultiSet&);
-	MultiSet& operator|=(const MultiSet&);
-	MultiSet& operator-=(const MultiSet&);
+	MultiSet& operator&=(const MultiSet&);	// intersection
+	MultiSet& operator|=(const MultiSet&);	// union
+	MultiSet& operator-=(const MultiSet&);	// minus
 
 	bool operator==(const MultiSet&) const;
 

@@ -2,19 +2,20 @@
 
 #include <iostream>
 
+/*Class objects are n-dimesional vectors.*/
 class MyVector {
 	friend std::ostream& operator<<(std::ostream&, const MyVector&);
 	friend std::istream& operator>>(std::istream&, MyVector&);
 
 public:
-	explicit MyVector(int);	// n >= 2
-	MyVector(int, const int*);
-	MyVector(const MyVector&);
-	MyVector& operator=(const MyVector&);
-	~MyVector();
+	explicit MyVector(int);	// n >= 2 ctor with parameters
+	MyVector(int, const int*);	// ctor with parameters
+	MyVector(const MyVector&);	// copy ctor
+	MyVector& operator=(const MyVector&);	// assignment operator
+	~MyVector();	// dtor
 
 	int dimension() const { return m_dimension; }
-	double distance(const MyVector&) const;
+	double distance(const MyVector&) const;	// distance of *this and given MyVector object
 
 	int& operator[](int);
 	const int& operator[](int) const;

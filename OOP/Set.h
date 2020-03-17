@@ -2,22 +2,23 @@
 
 #include <iostream>
 
+/*Class objects are sets with value limitation [0, 10000]*/
 class Set {
 	friend std::ostream& operator<<(std::ostream&, const Set&);
 
 public:
-	Set();
-	Set(int, const int*);
-	Set(const Set&);
-	Set& operator=(const Set&);
-	~Set();
+	Set();	// default ctor
+	Set(int, const int*);	// ctor with parameters
+	Set(const Set&);	// copy ctor
+	Set& operator=(const Set&);	// assignemt operator
+	~Set();	// dtor
 
-	bool contains(int) const;
-	bool is_sub_set(const Set&) const;
+	bool contains(int) const;	// checks if *this contains given value
+	bool is_sub_set(const Set&) const;	// checks if given Multiset object is subset for *this
 
-	Set& operator&=(const Set&);
-	Set& operator|=(const Set&);
-	Set& operator-=(const Set&);
+	Set& operator&=(const Set&);	// intersection
+	Set& operator|=(const Set&);	// union
+	Set& operator-=(const Set&);	// minus
 
 	bool operator==(const Set&) const;
 

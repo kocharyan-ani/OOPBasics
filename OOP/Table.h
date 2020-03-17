@@ -2,21 +2,23 @@
 
 #include <iostream>
 
+/*Class objects are matrixes.*/
 class Table {
 	friend std::ostream& operator<<(std::ostream&, const Table&);
 	friend std::istream& operator>>(std::istream&, Table&);
 
 public:
-	Table(int, int);
-	Table(int, int, const int* const *);
-	Table(const Table&);
-	Table& operator=(const Table&);
-	~Table();
+	// class does not have default ctor
+	Table(int, int);	// ctor with parameters
+	Table(int, int, const int* const *);	// ctor with parameters
+	Table(const Table&);	// copy ctor
+	Table& operator=(const Table&);	// assignment operator
+	~Table();	// dtor
 
 	int row_count() const { return m_rows; }
 	int column_count() const { return m_columns; }
 
-	int& operator()(int, int);
+	int& operator()(int, int);	// [i][j]
 	const int& operator()(int, int) const;
 
 	Table& operator+=(const Table&);

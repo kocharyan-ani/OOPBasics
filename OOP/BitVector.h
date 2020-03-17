@@ -2,16 +2,18 @@
 
 #include <iostream>
 
+/*Class objects are true/false sequences with fixed size.*/
 class BitVector {
 	friend std::ostream& operator<<(std::ostream&, const BitVector&);
 	friend std::istream& operator>>(std::istream&, BitVector&);
 
 public:
-	explicit BitVector(int);
-	BitVector(int, const bool*);
-	BitVector(const BitVector&);
-	BitVector& operator=(const BitVector&);
-	~BitVector();
+	// this class does not have default ctor
+	explicit BitVector(int);	// ctor with parameters
+	BitVector(int, const bool*);	// ctor with parameters
+	BitVector(const BitVector&);	// copy ctroe
+	BitVector& operator=(const BitVector&);	// assignment operator
+	~BitVector();	// dtor
 
 	int size() const { return m_size; }
 
