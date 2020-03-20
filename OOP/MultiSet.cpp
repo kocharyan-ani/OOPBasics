@@ -62,16 +62,16 @@ bool MultiSet::is_sub_set(const MultiSet& object) const {
 MultiSet& MultiSet::operator&=(const MultiSet& object) {
 	m_size = 0;
 	for (int i = 0; i < s_set_limit; ++i) {
-		m_data[i] += object.m_data[i];
+		m_data[i] = std::min(m_data[i], object.m_data[i]);
 		m_size += m_data[i];
 	}
-	return *this;
+	return *this;	
 }
 
-MultiSet& MultiSet::operator|=(const MultiSet& object) {
+MultiSet& MultiSet::operator|=(const MultiSet& object) {	
 	m_size = 0;
 	for (int i = 0; i < s_set_limit; ++i) {
-		m_data[i] = std::min(m_data[i], object.m_data[i]);
+		m_data[i] += object.m_data[i];
 		m_size += m_data[i];
 	}
 	return *this;

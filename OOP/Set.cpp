@@ -60,7 +60,7 @@ bool Set::is_sub_set(const Set& object) const {
 Set& Set::operator&=(const Set& object) {
 	m_size = 0;
 	for (int i = 0; i < s_set_limit; ++i) {
-		m_data[i] = m_data[i] || object.m_data[i];
+		m_data[i] = m_data[i] && object.m_data[i];
 		if (m_data[i]) {
 			++m_size;
 		}
@@ -71,8 +71,8 @@ Set& Set::operator&=(const Set& object) {
 Set& Set::operator|=(const Set& object) {
 	m_size = 0;
 	for (int i = 0; i < s_set_limit; ++i) {
-		m_data[i] = m_data[i] && object.m_data[i];
-		if(m_data[i]) {
+		m_data[i] = m_data[i] || object.m_data[i];
+		if (m_data[i]) {
 			++m_size;
 		}
 	}

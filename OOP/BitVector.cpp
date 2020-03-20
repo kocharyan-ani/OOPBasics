@@ -90,7 +90,6 @@ BitVector& BitVector::operator>>=(int n) {
 	}
 	int i = m_size - 1;
 	for (; i >= n; --i) {
-		auto x = m_data[i - n];
 		m_data[i] = m_data[i - n];
 	}
 	for (; i >= 0; --i) {
