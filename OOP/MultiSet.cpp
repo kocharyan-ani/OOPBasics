@@ -29,7 +29,9 @@ MultiSet::MultiSet(int size, const int* data)
 	}
 }
 
-MultiSet::MultiSet(const MultiSet& object) {
+MultiSet::MultiSet(const MultiSet& object)
+	: m_size(object.m_size)
+	, m_data(nullptr) {
 	allocate_and_initialize(object.m_data);
 }
 
