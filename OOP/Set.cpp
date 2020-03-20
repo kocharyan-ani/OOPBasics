@@ -27,7 +27,9 @@ Set::Set(int size, const int* data)
 	}
 }
 
-Set::Set(const Set& object) {
+Set::Set(const Set& object)
+	: m_size(object.m_size)
+	, m_data(nullptr) {
 	allocate_and_initialize(object.m_data);
 }
 
