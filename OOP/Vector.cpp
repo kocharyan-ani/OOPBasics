@@ -78,7 +78,7 @@ MyVector& MyVector::operator+=(const MyVector& object) {
 MyVector& MyVector::operator-=(const MyVector& object) {
 	check_size(object);
 	for (int i = 0; i < m_dimension; ++i) {
-		m_data[i] += object.m_data[i];
+		m_data[i] -= object.m_data[i];
 	}
 	return *this;
 }
