@@ -3,7 +3,7 @@
 std::ostream& operator<<(std::ostream& out, const MyVector& object) {
 	out << '(';
 	for (int i = 0; i < object.m_dimension - 1; ++i) {
-		out << object.m_data[i] << ', ';
+		out << object.m_data[i] << ", ";
 	}
 	out << object.m_data[object.m_dimension - 1] << ')' << std::endl;
 	return out;

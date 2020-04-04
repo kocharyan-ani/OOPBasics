@@ -1,9 +1,8 @@
 #include "Testing.h"
 
-#include <iostream>
-
 int main() {
-	std::cout << "**** Test for Array class ****" << std::endl;
+
+	/*std::cout << "**** Test for Array class ****" << std::endl;
 	Testing::test_for_array();
 
 	std::cout << std::endl << "**** Test for BitVector class ****" << std::endl;
@@ -25,7 +24,7 @@ int main() {
 	Testing::test_for_table();
 
 	std::cout << std::endl << "**** Test for MyVector class ****" << std::endl;
-	Testing::test_for_myvector();
+	Testing::test_for_myvector();*/
 
 	return 0;
 }
