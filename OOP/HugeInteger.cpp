@@ -35,6 +35,10 @@ HugeInteger::HugeInteger(unsigned int value)
 	, m_length(0)
 	, m_data(nullptr) {
 	m_data = new char[m_max_length] {};
+	if (value == 0) {
+		m_length = 1;
+		m_data[m_max_length - 1] = get_char(0);
+	}
 	for (int i = m_max_length - 1; value != 0; --i, value /= 10) {
 		m_data[i] = get_char(value % 10);
 		++m_length;

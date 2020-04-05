@@ -11,7 +11,7 @@
 
 void Testing::test_for_array() {
 	// testing default ctor, push_back and pop_back
-	Array a1;
+	Array<int> a1;
 	a1.push_back(1);
 	a1.push_back(2);
 	a1.push_back(3);
@@ -24,7 +24,7 @@ void Testing::test_for_array() {
 	// testing ctor, insert and remove
 	const int n = 5;
 	int a[5] = { 5, 4, 3, 2, 1 };
-	Array a2(5, a);
+	Array<int> a2(5, a);
 	std::cout << "a2 is: " << a2;
 	a2.insert(2, 100);
 	a2.insert(5, 100);
@@ -36,7 +36,7 @@ void Testing::test_for_array() {
 	std::cout << "after 3 removes a2 is: " << a2;
 
 	// testing copy ctor
-	Array a3(a2);
+	Array<int> a3(a2);
 	a3.push_back(0);
 	std::cout << "a3 is: " << a3;
 
@@ -45,7 +45,7 @@ void Testing::test_for_array() {
 	std::cout << "after a1 = a3 a1 is: " << a1;
 
 	// testing size and is_empty
-	Array a4;
+	Array<int> a4;
 	std::cout << "a1 size is: " << a1.size() << ", a2 size is: " << a2.size() 
 		      << ", a3 size is:" << a3.size() << ", a4 size is:" << a4.size() << std::endl;
 	std::cout << "is a1 empty: " << a1.is_empty() << ", is a2 empty:" << a2.is_empty() 
@@ -179,17 +179,17 @@ void Testing::test_for_string() {
 
 void Testing::test_for_table() {
 	// testing ctors and operator<<
-	Table t1(3, 4);
+	Table<int> t1(3, 4);
 	std::cout << "t1 is: " << std::endl << t1;
 	int** a = new int* [3];
 	for (int i = 0; i < 3; ++i) {
 		a[i] = new int[4]{ 1, 2, 3, 4 };
 	}
-	Table t2(3, 4, a);
+	Table<int> t2(3, 4, a);
 	std::cout << "t2 is: " << std::endl << t2;
 
 	// testing copy ctor
-	Table t3(t1);
+	Table<int> t3(t1);
 	std::cout << "t3 is: " << std::endl << t3;
 
 	// testing operator()
@@ -203,7 +203,7 @@ void Testing::test_for_table() {
 	std::cout << "after t1 += t2 t1 is: " << std::endl << t1;
 	t1 -= t2;
 	std::cout << "after t1 -= t2 t1 is: " << std::endl << t1;
-	Table t4(4, 2);
+	Table<int> t4(4, 2);
 	std::cout << "t4 is: " << std::endl << t4;
 	t1 *= t4;
 	std::cout << "after t1 *= t4 t1 is: " << std::endl << t1;

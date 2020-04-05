@@ -1,7 +1,9 @@
 #include "Testing.h"
 
-int main() {
+#include <iostream>
 
+int main() {
+	
 	/*std::cout << "**** Test for Array class ****" << std::endl;
 	Testing::test_for_array();
 

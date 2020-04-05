@@ -123,14 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Array.cpp" />
     <ClCompile Include="BitVector.cpp" />
     <ClCompile Include="HugeInteger.cpp" />
     <ClCompile Include="MultiSet.cpp" />
     <ClCompile Include="Set.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="String.cpp" />
-    <ClCompile Include="Table.cpp" />
     <ClCompile Include="Testing.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
