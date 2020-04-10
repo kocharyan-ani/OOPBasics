@@ -140,9 +140,9 @@ Table<T>& Table<T>::operator*=(const Table<T>& object) {
 	check_mult_correct(object);
 	int r = m_rows;
 	int c = object.m_columns;
-	int** tmp = new int* [r];
-	for (int i = 0; i < r; ++i) {
-		tmp[i] = new int[c] {};
+	T** tmp = new T* [r];
+	for (T i = 0; i < r; ++i) {
+		tmp[i] = new T[c] {};
 	}
 	for (int i = 0; i < r; ++i) {
 		for (int j = 0; j < c; ++j) {
