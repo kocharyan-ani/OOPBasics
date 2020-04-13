@@ -11,6 +11,7 @@ int main() {
 	//Sortings::selection_sort(a, n);
 	//Sortings::merge_sort(a, 0, n - 1);
 	//Sortings::quick_sort(a, 0, n - 1);
+	//Sortings::radix_sort(a, n);
 
 	for (int element : a) {
 		std::cout << element << ' ';

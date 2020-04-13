@@ -1,6 +1,7 @@
 #include "Sortings.h"
 
 #include <algorithm>
+#include <queue>
 
 void Sortings::bubble_sort(int* array, int size) {
 	for (int i = 0; i < size; ++i) {
@@ -98,5 +99,27 @@ void Sortings::quick_sort(int* array, int first, int second) {
 		int pivot = partition(array, first, second);
 		quick_sort(array, first, pivot - 1);
 		quick_sort(array, pivot + 1, second);
+	}
+}
+
+namespace {
+	int bit(int n, int k) {
+		return (n >> k) & 1;
+	}
+}
+
+void Sortings::radix_sort(int* array, int size) {
+	const int length = sizeof(int) * 8;
+	std::queue<int> Q[2];
+	for (int i = 0; i < length; ++i) {
+		for (int j = 0; j < size; ++j) {
+			Q[bit(array[j], i)].push(array[j]);
+		}
+		for (int i = 0, j = 0; j < 2; ++j) {
+			while (!Q[j].empty()) {
+				array[i++] = Q[j].front();
+				Q[j].pop();
+			}
+		}
 	}
 }
