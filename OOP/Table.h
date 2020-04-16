@@ -6,24 +6,9 @@
 template <typename T>
 class Table {
 	template <typename T1>
-	friend std::ostream& operator<<(std::ostream& out, const Table<T1>& object) {
-		for (int i = 0; i < object.m_rows; ++i) {
-			for (int j = 0; j < object.m_columns - 1; ++j) {
-				out << object.m_data[i][j] << ' ';
-			}
-			out << object.m_data[i][object.m_columns - 1] << std::endl;
-		}
-		return out;
-	}
+	friend std::ostream& operator<<(std::ostream&, const Table<T1>&);
 	template <typename T1>
-	friend std::istream& operator>>(std::istream& in, Table<T1>& object) {
-		for (int i = 0; i < object.m_rows; ++i) {
-			for (int j = 0; j < object.m_columns; ++j) {
-				in >> object.m_data[i][j];
-			}
-		}
-		return in;
-	}
+	friend std::istream& operator>>(std::istream&, Table<T1>&);
 
 public:
 	// class does not have default ctor
@@ -58,6 +43,27 @@ private:
 	int m_columns;
 	T** m_data;
 };
+
+template <typename T>
+std::ostream& operator<<(std::ostream& out, const Table<T>& object) {
+	for (int i = 0; i < object.m_rows; ++i) {
+		for (int j = 0; j < object.m_columns - 1; ++j) {
+			out << object.m_data[i][j] << ' ';
+		}
+		out << object.m_data[i][object.m_columns - 1] << std::endl;
+	}
+	return out;
+}
+
+template <typename T>
+std::istream& operator>>(std::istream& in, Table<T>& object) {
+	for (int i = 0; i < object.m_rows; ++i) {
+		for (int j = 0; j < object.m_columns; ++j) {
+			in >> object.m_data[i][j];
+		}
+	}
+	return in;
+}
 
 template <typename T>
 Table<T>::Table(int rows, int columns)

@@ -6,23 +6,9 @@
 template <typename T>
 class Array {
 	template <typename T1>
-	friend std::ostream& operator<<(std::ostream& out, const Array<T1>& object) {
-		if (!object.is_empty()) {
-			int i = 0;
-			for (; i < object.m_size - 1; ++i) {
-				out << object.m_data[i] << ' ';
-			}
-			out << object.m_data[i] << std::endl;
-		}
-		return out;
-	}
+	friend std::ostream& operator<<(std::ostream&, const Array<T1>&);
 	template <typename T1>
-	friend std::istream& operator>>(std::istream& in, Array<T1>& object) {
-		for (int i = 0; i < object.m_size; ++i) {
-			in >> object[i];
-		}
-		return in;
-	}
+	friend std::istream& operator>>(std::istream&, Array<T1>&);
 
 public:
 	Array();	// default ctor
@@ -55,6 +41,25 @@ private:
 	int m_size;
 	T* m_data;
 };
+
+template <typename T>
+std::ostream& operator<<(std::ostream& out, const Array<T>& object) {
+	if (!object.is_empty()) {
+		int i = 0;
+		for (; i < object.m_size - 1; ++i) {
+			out << object.m_data[i] << ' ';
+		}
+		out << object.m_data[i] << std::endl;
+	}
+	return out;
+}
+template <typename T>
+std::istream& operator>>(std::istream& in, Array<T>& object) {
+	for (int i = 0; i < object.m_size; ++i) {
+		in >> object[i];
+	}
+	return in;
+}
 
 template <typename T>
 Array<T>::Array()

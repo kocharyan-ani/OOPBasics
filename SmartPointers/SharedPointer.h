@@ -101,7 +101,9 @@ void SharedPointer<T>::deallocate() {
 	assert(m_metadata != nullptr);
 	if (m_metadata->release_reference() == 0) {
 		delete m_metadata;
+		m_metadata = nullptr;
 		delete m_pointer;
+		m_pointer = nullptr;
 	}
 }
 
