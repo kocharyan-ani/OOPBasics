@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ArrayExceptions.h"
+
 #include <iostream>
 
 /*Class objects are arrays with variable size.*/
@@ -133,13 +135,13 @@ void Array<T>::pop_back() {
 		--m_size;
 		return;
 	}
-	throw std::exception("Array is empty.");
+	throw ArrayIsEmptyException();
 }
 
 template <typename T>
 void Array<T>::insert(int index, const T& element) {
 	if (index < 0) {
-		throw std::exception("Index is less than 0.");
+		throw IndexIsLessThan0Exception();
 	}
 	if (index >= m_size) {
 		push_back(element);
@@ -165,7 +167,7 @@ void Array<T>::insert(int index, const T& element) {
 template <typename T>
 void Array<T>::remove(int index) {
 	if (index < 0) {
-		throw std::exception("Index is less than 0.");
+		throw IndexIsLessThan0Exception();
 	}
 	if (index >= m_size) {
 		pop_back();
@@ -202,6 +204,6 @@ void Array<T>::deallocate() {
 template <typename T>
 void Array<T>::check_index(int index) const {
 	if (index < 0 || index >= m_size) {
-		throw std::exception("Index is out of bounds.");
+		throw IndexOutOfBoundsException();
 	}
 }

@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
+    <ClInclude Include="ArrayExceptions.h" />
     <ClInclude Include="BitVector.h" />
     <ClInclude Include="HugeInteger.h" />
     <ClInclude Include="MultiSet.h" />

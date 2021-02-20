@@ -1,6 +1,7 @@
 #include "Testing.h"
 
 #include "Array.h"
+#include "ArrayExceptions.h"
 #include "BitVector.h"
 #include "HugeInteger.h"
 #include "MultiSet.h"
@@ -17,8 +18,13 @@ void Testing::test_for_array() {
 	a1.push_back(3);
 	a1.push_back(4);
 	std::cout << "after 4 push_back calls a1 is: " << a1;
-	a1.pop_back();
-	a1.pop_back();
+	try {
+		a1.pop_back();
+		a1.pop_back();
+	}
+	catch (const ArrayIsEmptyException& e) {
+		std::cout << "Exception is thrown while pop_back(): " << e.what() << std::endl;
+	}
 	std::cout << "after 2 pop_back calls a1 is: " << a1;
 
 	// testing ctor, insert and remove
@@ -26,13 +32,23 @@ void Testing::test_for_array() {
 	int a[5] = { 5, 4, 3, 2, 1 };
 	Array<int> a2(5, a);
 	std::cout << "a2 is: " << a2;
-	a2.insert(2, 100);
-	a2.insert(5, 100);
-	a2.insert(10, 100);
+	try {
+		a2.insert(2, 100);
+		a2.insert(5, 100);
+		a2.insert(10, 100);
+	}
+	catch (const IndexIsLessThan0Exception& e) {
+		std::cout << "Exception is thrown while insert(): " << e.what() << std::endl;
+	}
 	std::cout << "after 3 inserts a2 is: " << a2;
-	a2.remove(10);
-	a2.remove(5);
-	a2.remove(2);
+	try {
+		a2.remove(10);
+		a2.remove(5);
+		a2.remove(2);
+	}
+	catch (const IndexIsLessThan0Exception& e) {
+		std::cout << "Exception is thrown while remove(): " << e.what() << std::endl;
+	}
 	std::cout << "after 3 removes a2 is: " << a2;
 
 	// testing copy ctor
